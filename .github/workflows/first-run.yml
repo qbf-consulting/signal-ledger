@@ -1,0 +1,48 @@
+name: Signal Ledger First Run
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - "src/**"
+      - "profiles/**"
+      - "tests/fixtures/**"
+      - ".github/workflows/first-run.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - name: Install
+        run: python -m pip install -e ".[dev]"
+      - name: Run tests
+        run: pytest
+      - name: Execute Signal Ledger
+        run: python -m signal_ledger.demo --output artifacts/first-run.json
+      - name: Validate run artifact
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          report = json.loads(Path("artifacts/first-run.json").read_text())
+          assert report["schema"] == "signal-ledger.run.v1"
+          assert report["event"]["state"] == "confirmed"
+          assert report["claim"]["evidence_state"] == "verified"
+          assert report["material_change"] is True
+          print(json.dumps(report, indent=2))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: signal-ledger-first-run
+          path: artifacts/first-run.json
+          if-no-files-found: error

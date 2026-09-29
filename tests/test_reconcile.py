@@ -4,7 +4,6 @@ from pathlib import Path
 from signal_ledger.models import Observation
 from signal_ledger.reconcile import reconcile
 
-
 FIXTURE = Path(__file__).parent / "fixtures" / "observation.json"
 
 

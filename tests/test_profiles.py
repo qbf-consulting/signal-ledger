@@ -1,4 +1,4 @@
-from copy import deepcopy
+import copy
 from pathlib import Path
 
 from signal_ledger.profiles import apply_profile, load_profile
@@ -14,7 +14,7 @@ def test_all_shipped_profiles_validate() -> None:
 
 def test_profile_application_is_derived_and_does_not_mutate_profile() -> None:
     profile = load_profile(PROFILE_DIR / "digital-trust.json")
-    before = deepcopy(profile)
+    before = copy.deepcopy(profile)
     result = apply_profile(profile, "A trust registry and verifiable credential update")
     assert result.relevant is True
     assert profile == before

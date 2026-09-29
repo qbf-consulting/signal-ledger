@@ -6,7 +6,6 @@ from unittest.mock import patch
 from signal_ledger.operational import build_operational_publication, parse_feed
 from signal_ledger.site import build_site
 
-
 SOURCE = {"id":"test","name":"Test Standards Body","source_class":"official","authority_scope":"Own publications."}
 
 

@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://qbfconsulting.digital/signal-ledger/schemas/observation.schema.json",
+  "title": "Signal Ledger Observation",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id", "source_id", "canonical_uri", "title", "language", "retrieved_at",
+    "content_digest", "collection_method", "collector"
+  ],
+  "properties": {
+    "id": {"type": "string", "pattern": "^[a-z][a-z0-9._-]{2,127}$"},
+    "source_id": {"type": "string", "pattern": "^[a-z][a-z0-9._-]{2,127}$"},
+    "canonical_uri": {"type": "string", "format": "uri"},
+    "title": {"type": "string", "minLength": 1, "maxLength": 500},
+    "summary": {"type": ["string", "null"], "maxLength": 5000},
+    "language": {"type": "string", "pattern": "^[A-Za-z]{2,3}(?:-[A-Za-z0-9]{2,8})*$", "default": "en"},
+    "published_at": {"type": ["string", "null"], "format": "date-time"},
+    "retrieved_at": {"type": "string", "format": "date-time"},
+    "content_digest": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"},
+    "collection_method": {"enum": ["rss", "atom", "api", "html", "manual", "file"]},
+    "collector": {"type": "string", "minLength": 1, "maxLength": 120},
+    "source_version": {"type": ["string", "null"], "maxLength": 120}
+  }
+}

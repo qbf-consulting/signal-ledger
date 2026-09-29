@@ -1,0 +1,12 @@
+{
+  "id": "source.example",
+  "name": "Example Primary Source",
+  "canonical_uri": "https://example.org/",
+  "source_class": "primary",
+  "authority_domains": ["example-domain"],
+  "jurisdiction": null,
+  "collection_method": "rss",
+  "cadence": "PT6H",
+  "status": "active",
+  "scope_notes": "Fixture source for conformance tests."
+}

@@ -7,7 +7,6 @@ from typing import Annotated
 
 from pydantic import BaseModel, ConfigDict, Field, HttpUrl, field_validator
 
-
 SHA256_RE = re.compile(r"^sha256:[0-9a-f]{64}$")
 
 

@@ -20,7 +20,7 @@ def test_operational_publication_drives_consumer_site(tmp_path):
     registry=tmp_path/"sources.json"
     registry.write_text(json.dumps({"sources":[{**SOURCE,"feed_url":"https://example.org/feed","canonical_uri":"https://example.org","domains":["digital-trust"]}]}))
     item=parse_feed(Path("tests/fixtures/feed.xml").read_bytes(),SOURCE,datetime(2026,9,29,tzinfo=UTC))
-    with patch("signal_ledger.operational.collect",return_value=(item,[{"source_id":"test","status":"ok","items":1}])):
+    with patch("signal_ledger.operational.collect",return_value=(item,{"source_id":"test","status":"ok","items":1})):
         pub=build_operational_publication(registry,tmp_path/"pub")
     assert pub["manifest"]["published_signals"]>=1
     target=build_site(tmp_path/"site",tmp_path/"pub")

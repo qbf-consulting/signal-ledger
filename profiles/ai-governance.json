@@ -1,0 +1,14 @@
+{
+  "id": "ai-governance",
+  "dimensions": [
+    "novelty",
+    "ecosystem_impact",
+    "governance_impact",
+    "deployment_impact",
+    "research_significance",
+    "reversibility",
+    "evidence_strength",
+    "geographic_scope"
+  ],
+  "policy": "Assess dimensions independently; coverage volume is corroboration, not significance."
+}

@@ -1,0 +1,141 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://qbfconsulting.digital/signal-ledger/schemas/profile.schema.json",
+  "title": "Signal Ledger Profile",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "title",
+    "purpose",
+    "source_policy",
+    "relevance",
+    "significance_dimensions",
+    "output"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9-]+$"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "purpose": {
+      "type": "string",
+      "minLength": 1
+    },
+    "source_policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "preferred_classes",
+        "authority_expectations"
+      ],
+      "properties": {
+        "preferred_classes": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "primary",
+              "official",
+              "research",
+              "journalism",
+              "analysis",
+              "community",
+              "other"
+            ]
+          },
+          "uniqueItems": true
+        },
+        "authority_expectations": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "relevance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "include_terms",
+        "exclude_terms"
+      ],
+      "properties": {
+        "include_terms": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "exclude_terms": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "significance_dimensions": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "novelty",
+          "ecosystem_impact",
+          "governance_impact",
+          "deployment_impact",
+          "research_significance",
+          "reversibility",
+          "evidence_strength",
+          "geographic_scope"
+        ]
+      },
+      "uniqueItems": true,
+      "minItems": 1
+    },
+    "discovery": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "channels": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "candidate_lanes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        }
+      }
+    },
+    "output": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "semantics"
+      ],
+      "properties": {
+        "semantics": {
+          "type": "string",
+          "minLength": 1
+        },
+        "handoff_schema": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

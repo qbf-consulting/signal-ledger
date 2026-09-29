@@ -1,0 +1,53 @@
+{
+  "id": "digital-trust",
+  "title": "Digital Trust",
+  "purpose": "Surface material changes in digital identity, credentials, trust registries, delegation, assurance and executable governance.",
+  "source_policy": {
+    "preferred_classes": [
+      "primary",
+      "official",
+      "research"
+    ],
+    "authority_expectations": [
+      "Normative protocol or standards claims should resolve to the originating specification or standards body.",
+      "Implementation evidence must remain distinguishable from proposed architecture."
+    ]
+  },
+  "relevance": {
+    "include_terms": [
+      "verifiable credential",
+      "decentralized identifier",
+      "trust registry",
+      "trust framework",
+      "delegation",
+      "assurance",
+      "digital identity",
+      "agent registry",
+      "governance"
+    ],
+    "exclude_terms": [
+      "generic cybersecurity marketing"
+    ]
+  },
+  "significance_dimensions": [
+    "novelty",
+    "ecosystem_impact",
+    "governance_impact",
+    "deployment_impact",
+    "research_significance",
+    "evidence_strength",
+    "geographic_scope"
+  ],
+  "discovery": {
+    "channels": [
+      "standards-body",
+      "official-source",
+      "research",
+      "implementation-evidence",
+      "independent-analysis"
+    ]
+  },
+  "output": {
+    "semantics": "Digital-trust relevance is a derived overlay; it does not alter source authority or evidence state."
+  }
+}

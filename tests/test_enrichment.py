@@ -1,4 +1,4 @@
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 
 import pytest
 
@@ -10,7 +10,7 @@ def provenance() -> DerivationProvenance:
         mechanism="test",
         model=None,
         prompt_version="v1",
-        generated_at=datetime.now(timezone.utc),
+        generated_at=datetime.now(UTC),
         evidence_refs=("obs.one",),
     )
 

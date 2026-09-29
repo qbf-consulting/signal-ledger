@@ -1,0 +1,26 @@
+{
+  "id": "digital-governance-paper-notes",
+  "observation_kind": "research-paper",
+  "discovery_channels": [
+    "known-author",
+    "known-venue",
+    "citation-neighbourhood",
+    "topic-query",
+    "external-curation",
+    "exploration-sample"
+  ],
+  "handoff": {
+    "format": "signal-ledger.research-candidate.v1",
+    "required": ["observation_id", "canonical_uri", "title", "discovery_channel", "evidence_refs"]
+  },
+  "evaluation": [
+    "recall",
+    "novelty",
+    "precision",
+    "duplication",
+    "disciplinary_diversity",
+    "geographic_diversity",
+    "explainability",
+    "review_conversion"
+  ]
+}

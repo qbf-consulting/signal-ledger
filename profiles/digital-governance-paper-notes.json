@@ -1,26 +1,57 @@
 {
   "id": "digital-governance-paper-notes",
-  "observation_kind": "research-paper",
-  "discovery_channels": [
-    "known-author",
-    "known-venue",
-    "citation-neighbourhood",
-    "topic-query",
-    "external-curation",
-    "exploration-sample"
-  ],
-  "handoff": {
-    "format": "signal-ledger.research-candidate.v1",
-    "required": ["observation_id", "canonical_uri", "title", "discovery_channel", "evidence_refs"]
+  "title": "Digital Governance Paper Notes",
+  "purpose": "Discover research candidates for human editorial review without narrowing discovery to prior interests.",
+  "source_policy": {
+    "preferred_classes": [
+      "research",
+      "primary",
+      "analysis"
+    ],
+    "authority_expectations": [
+      "A review candidate must retain a canonical paper URI and observation provenance.",
+      "Editorial review is downstream analysis, not primary evidence for the paper's claims."
+    ]
   },
-  "evaluation": [
-    "recall",
+  "relevance": {
+    "include_terms": [
+      "digital governance",
+      "digital public infrastructure",
+      "digital identity",
+      "platform governance",
+      "AI governance",
+      "trust infrastructure",
+      "public interest technology"
+    ],
+    "exclude_terms": [
+      "retracted without contextual value"
+    ]
+  },
+  "significance_dimensions": [
     "novelty",
-    "precision",
-    "duplication",
-    "disciplinary_diversity",
-    "geographic_diversity",
-    "explainability",
-    "review_conversion"
-  ]
+    "governance_impact",
+    "research_significance",
+    "evidence_strength",
+    "geographic_scope"
+  ],
+  "discovery": {
+    "channels": [
+      "known-author",
+      "known-venue",
+      "citation-neighbourhood",
+      "topic-query",
+      "external-curation",
+      "exploration-sample"
+    ],
+    "candidate_lanes": [
+      "established-interest",
+      "adjacent-domain",
+      "exploratory",
+      "counter-thesis"
+    ]
+  },
+  "output": {
+    "semantics": "Candidate discovery and triage only; publication remains a human editorial decision.",
+    "handoff_schema": "signal-ledger.research-candidate.v1"
+  }
 }

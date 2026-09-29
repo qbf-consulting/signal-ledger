@@ -18,7 +18,7 @@ def build_site(output_dir: Path) -> Path:
     """Render a static, repository-derived public projection."""
     output_dir.mkdir(parents=True, exist_ok=True)
     profile = json.loads(Path("profiles/ai-governance.json").read_text(encoding="utf-8"))
-    dimensions = ", ".join(profile["dimensions"])
+    dimensions = ", ".join(profile["significance_dimensions"])
 
     cards = "".join(
         [

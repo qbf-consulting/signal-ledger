@@ -9,6 +9,10 @@ description = "Evidence-backed change intelligence primitives for governed obser
 readme = "README.md"
 requires-python = ">=3.11"
 authors = [{name = "QBF Consulting LLP"}]
+license = "Apache-2.0"
+classifiers = [
+  "License :: OSI Approved :: Apache Software License",
+]
 dependencies = [
   "pydantic>=2.9,<3",
   "jsonschema>=4.23,<5",

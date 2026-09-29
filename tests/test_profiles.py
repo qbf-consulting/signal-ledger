@@ -3,7 +3,6 @@ from pathlib import Path
 
 from signal_ledger.profiles import apply_profile, load_profile
 
-
 PROFILE_DIR = Path("profiles")
 
 

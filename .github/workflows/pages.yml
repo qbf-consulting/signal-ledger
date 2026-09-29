@@ -2,16 +2,13 @@ name: Deploy Signal Ledger Pages
 
 on:
   push:
-    branches:
-      - main
+    branches: [main]
     paths:
       - "src/**"
       - "profiles/**"
+      - "tests/fixtures/**"
       - "docs/**"
       - "README.md"
-      - "LICENSE*"
-      - "NOTICE"
-      - "artifact-license-policy.json"
       - ".github/workflows/pages.yml"
   workflow_dispatch:
 
@@ -35,13 +32,27 @@ jobs:
         run: python -m pip install -e ".[dev]"
       - name: Test
         run: pytest
-      - name: Build public projection
-        run: python -m signal_ledger.site --output-dir _site
-      - name: Validate projection
+      - name: Execute assured ledger run
+        run: python -m signal_ledger.demo --output artifacts/pages-run.json
+      - name: Build governed publication snapshot
+        run: python -m signal_ledger.publication --run artifacts/pages-run.json --output-dir publications/latest --profile ai-governance
+      - name: Render public projection
+        run: python -m signal_ledger.site --publication-dir publications/latest --output-dir _site
+      - name: Validate publication and projection
         run: |
+          python - <<'PY'
+          from pathlib import Path
+          from signal_ledger.publication import load_publication
+          snapshot = load_publication(Path("publications/latest"))
+          assert snapshot["manifest"]["schema"] == "signal-ledger.publication.v1"
+          assert snapshot["pulse"]["events"] >= 1
+          PY
           test -s _site/index.html
+          test -s _site/ledger.html
+          test -s _site/methodology.html
+          test -s _site/data/manifest.json
+          grep -q "What changed?" _site/index.html
           grep -q "read-only projection" _site/index.html
-          grep -q "github.com/qbf-consulting/signal-ledger" _site/index.html
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:

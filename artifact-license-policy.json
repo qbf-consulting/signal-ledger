@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "policy_version": "1.0",
+  "copyright_holder": "QBF Consulting LLP",
+  "defaults": [
+    {
+      "license": "Apache-2.0",
+      "artifacts": [
+        "src/**",
+        "schemas/**",
+        "profiles/**",
+        "tests/**",
+        ".github/workflows/**",
+        "pyproject.toml",
+        "artifact-license-policy.json"
+      ]
+    },
+    {
+      "license": "CC-BY-4.0",
+      "artifacts": [
+        "README.md",
+        "CONTRIBUTING.md",
+        "SECURITY.md",
+        "docs/**"
+      ]
+    }
+  ],
+  "precedence": [
+    "artifact-level SPDX or license declaration",
+    "third-party or inherited provenance notice",
+    "repository default map"
+  ]
+}

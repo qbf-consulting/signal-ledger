@@ -24,4 +24,4 @@ pytest
 
 ## Licensing
 
-This repository intentionally has no license at present. Do not assume permission to redistribute repository content beyond rights explicitly granted by the repository owner.
+Contributions are accepted under the license applicable to the artifact class being modified: **Apache-2.0** for executable and machine-readable artifacts, and **CC BY 4.0** for specifications and documentation. Contributors must preserve third-party provenance and any more-specific artifact-level license. See [LICENSE](LICENSE) and [artifact-license-policy.json](artifact-license-policy.json).

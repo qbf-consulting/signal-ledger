@@ -1,0 +1,14 @@
+{
+  "id": "obs.example.001",
+  "source_id": "source.example",
+  "canonical_uri": "https://example.org/notices/1",
+  "title": "Example notice",
+  "summary": "A fixture observation used to test provenance-preserving ingestion.",
+  "language": "en",
+  "published_at": "2026-09-29T09:00:00+00:00",
+  "retrieved_at": "2026-09-29T09:05:00+00:00",
+  "content_digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "collection_method": "rss",
+  "collector": "fixture-collector",
+  "source_version": "etag-example"
+}

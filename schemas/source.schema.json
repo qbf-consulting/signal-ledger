@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://qbfconsulting.digital/signal-ledger/schemas/source.schema.json",
+  "title": "Signal Ledger Source",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "name", "canonical_uri", "source_class", "collection_method"],
+  "properties": {
+    "id": {"type": "string", "pattern": "^[a-z][a-z0-9._-]{2,127}$"},
+    "name": {"type": "string", "minLength": 1, "maxLength": 200},
+    "canonical_uri": {"type": "string", "format": "uri"},
+    "source_class": {"enum": ["primary", "official", "research", "journalism", "analysis", "community", "other"]},
+    "authority_domains": {
+      "type": "array",
+      "items": {"type": "string", "minLength": 1},
+      "default": []
+    },
+    "jurisdiction": {"type": ["string", "null"], "maxLength": 120},
+    "collection_method": {"enum": ["rss", "atom", "api", "html", "manual", "file"]},
+    "cadence": {"type": ["string", "null"], "maxLength": 80},
+    "status": {"enum": ["active", "paused", "retired"], "default": "active"},
+    "scope_notes": {"type": ["string", "null"], "maxLength": 1000}
+  }
+}

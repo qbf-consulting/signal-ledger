@@ -1,8 +1,8 @@
 from __future__ import annotations
 
 from dataclasses import asdict, dataclass
-from datetime import datetime, timezone
-from typing import Protocol
+from datetime import UTC, datetime
+from typing import ClassVar, Protocol
 
 ALLOWED_DERIVED_KINDS = frozenset({"candidate_claim", "topic", "relevance_explanation"})
 PROHIBITED_AUTHORITY_KINDS = frozenset(
@@ -51,7 +51,7 @@ class RuleEnricher:
     """Versioned deterministic provider that proves the auditable enrichment contract."""
 
     VERSION = "rules-v1"
-    TOPICS = {
+    TOPICS: ClassVar[dict[str, tuple[str, ...]]] = {
         "digital-trust": ("trust registry", "verifiable credential", "digital identity", "delegation"),
         "ai-governance": ("ai governance", "ai regulation", "artificial intelligence"),
         "research": ("paper", "study", "research"),
@@ -59,7 +59,7 @@ class RuleEnricher:
 
     def enrich(self, text: str, evidence_refs: tuple[str, ...]) -> tuple[Enrichment, ...]:
         normalized = text.casefold()
-        now = datetime.now(timezone.utc)
+        now = datetime.now(UTC)
         provenance = DerivationProvenance(
             mechanism="deterministic-rule",
             model="signal-ledger-rule-enricher",

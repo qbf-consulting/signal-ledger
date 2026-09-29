@@ -7,3 +7,9 @@ dist/
 build/
 *.egg-info/
 data/
+.env
+.env.*
+!.env.example
+artifacts/
+*.pem
+*.key

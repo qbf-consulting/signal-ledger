@@ -71,6 +71,18 @@ Inspect it:
 signal-ledger inspect-observation obs.example.001 --store ./data
 ```
 
+## End-to-end demonstration
+
+A deterministic workflow exercises observations -> reconciliation -> claims/evidence -> significance -> run artifact without network or AI dependencies.
+
+Run locally:
+
+```bash
+python -m signal_ledger.demo --output artifacts/first-run.json
+```
+
+See [First workflow run](docs/first-run.md).
+
 ## Repository discipline
 
 Changes are expected to proceed through issue -> feature branch -> pull request, with tests and documentation updated alongside behavior. See [CONTRIBUTING.md](CONTRIBUTING.md).

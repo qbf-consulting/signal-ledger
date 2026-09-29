@@ -6,7 +6,6 @@ import pytest
 from signal_ledger.models import Observation
 from signal_ledger.storage import ObservationExistsError, ObservationStore
 
-
 FIXTURE = Path(__file__).parent / "fixtures" / "observation.json"
 
 

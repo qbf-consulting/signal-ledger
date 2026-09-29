@@ -1,0 +1,56 @@
+name: Operational Signal Ledger
+
+on:
+  schedule:
+    - cron: "17 */6 * * *"
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "src/signal_ledger/operational.py"
+      - "src/signal_ledger/site.py"
+      - "sources/**"
+      - "profiles/**"
+      - ".github/workflows/operational.yml"
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: operational-pages
+  cancel-in-progress: false
+
+jobs:
+  collect-publish-deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: python -m pip install -e ".[dev]"
+      - name: Conformance tests
+        run: pytest
+      - name: Collect governed public sources
+        run: python -m signal_ledger.operational --sources sources/pilot.json --output-dir publications/operational
+      - name: Render consumer publication
+        run: python -m signal_ledger.site --publication-dir publications/operational --output-dir _site
+      - name: Validate consumer surface
+        run: |
+          test -s _site/index.html
+          test -s _site/evidence.html
+          test -s _site/data/signals.json
+          grep -q "What should you know?" _site/index.html
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+      - name: Deploy
+        id: deployment
+        uses: actions/deploy-pages@v4

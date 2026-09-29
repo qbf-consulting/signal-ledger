@@ -1,26 +1,18 @@
-name: Deploy Signal Ledger Pages
+name: Publication Conformance
 
 on:
-  push:
-    branches: [main]
+  pull_request:
     paths:
-      - "src/**"
-      - "profiles/**"
-      - "tests/fixtures/**"
-      - "docs/**"
-      - "README.md"
+      - "src/signal_ledger/publication.py"
+      - "tests/test_publication.py"
       - ".github/workflows/pages.yml"
   workflow_dispatch:
 
 permissions:
   contents: read
 
-concurrency:
-  group: pages
-  cancel-in-progress: false
-
 jobs:
-  build:
+  conformance:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -28,46 +20,10 @@ jobs:
         with:
           python-version: "3.12"
           cache: pip
-      - name: Install
-        run: python -m pip install -e ".[dev]"
-      - name: Test
-        run: pytest
-      - name: Execute assured ledger run
-        run: python -m signal_ledger.demo --output artifacts/pages-run.json
-      - name: Build governed publication snapshot
-        run: python -m signal_ledger.publication --run artifacts/pages-run.json --output-dir publications/latest --profile ai-governance
-      - name: Render public projection
-        run: python -m signal_ledger.site --publication-dir publications/latest --output-dir _site
-      - name: Validate publication and projection
-        run: |
-          python - <<'PY'
-          from pathlib import Path
-          from signal_ledger.publication import load_publication
-          snapshot = load_publication(Path("publications/latest"))
-          assert snapshot["manifest"]["schema"] == "signal-ledger.publication.v1"
-          assert snapshot["pulse"]["events"] >= 1
-          PY
-          test -s _site/index.html
-          test -s _site/ledger.html
-          test -s _site/methodology.html
-          test -s _site/data/manifest.json
-          grep -q "What changed?" _site/index.html
-          grep -q "read-only projection" _site/index.html
-      - uses: actions/configure-pages@v5
-      - uses: actions/upload-pages-artifact@v3
-        with:
-          path: _site
+      - run: python -m pip install -e ".[dev]"
+      - name: Verify publication contract
+        run: pytest tests/test_publication.py
 
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    permissions:
-      pages: write
-      id-token: write
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+# Public deployment authority belongs exclusively to operational.yml.
+# This workflow preserves the deterministic publication contract without
+# competing for the github-pages environment.

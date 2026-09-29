@@ -1,0 +1,73 @@
+{
+  "schema": "signal-ledger.sources.v1",
+  "sources": [
+    {
+      "id": "nist-news",
+      "name": "NIST News",
+      "feed_url": "https://www.nist.gov/news-events/news/rss.xml",
+      "canonical_uri": "https://www.nist.gov/news-events",
+      "source_class": "official",
+      "domains": [
+        "ai-governance"
+      ],
+      "authority_scope": "Authoritative for NIST publications and announcements; not automatically authoritative for external claims."
+    },
+    {
+      "id": "nist-standards",
+      "name": "NIST Standards",
+      "feed_url": "https://www.nist.gov/news-events/standards/rss.xml",
+      "canonical_uri": "https://www.nist.gov/standards",
+      "source_class": "official",
+      "domains": [
+        "ai-governance",
+        "digital-trust"
+      ],
+      "authority_scope": "Authoritative for NIST standards activity and publications."
+    },
+    {
+      "id": "nist-cybersecurity",
+      "name": "NIST Cybersecurity",
+      "feed_url": "https://www.nist.gov/news-events/cybersecurity/rss.xml",
+      "canonical_uri": "https://www.nist.gov/cybersecurity",
+      "source_class": "official",
+      "domains": [
+        "ai-governance",
+        "digital-trust"
+      ],
+      "authority_scope": "Authoritative for NIST cybersecurity publications and announcements."
+    },
+    {
+      "id": "w3c-news",
+      "name": "W3C News",
+      "feed_url": "https://www.w3.org/news/feed/",
+      "canonical_uri": "https://www.w3.org/news/",
+      "source_class": "official",
+      "domains": [
+        "digital-trust"
+      ],
+      "authority_scope": "Authoritative for W3C publication and standards-process announcements."
+    },
+    {
+      "id": "w3c-credentials",
+      "name": "W3C Credentials Community Group",
+      "feed_url": "https://www.w3.org/community/credentials/feed/",
+      "canonical_uri": "https://www.w3.org/community/credentials/",
+      "source_class": "community",
+      "domains": [
+        "digital-trust"
+      ],
+      "authority_scope": "Authoritative for the Community Group's own activity; Community Group work is not automatically a W3C Standard."
+    },
+    {
+      "id": "toip",
+      "name": "Trust Over IP",
+      "feed_url": "https://www.trustoverip.org/feed/",
+      "canonical_uri": "https://www.trustoverip.org/",
+      "source_class": "official",
+      "domains": [
+        "digital-trust"
+      ],
+      "authority_scope": "Authoritative for ToIP project publications and announcements; specification maturity must be taken from the referenced artifact."
+    }
+  ]
+}

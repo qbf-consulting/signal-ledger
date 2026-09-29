@@ -10,6 +10,7 @@ from .reconcile import reconcile
 
 
 def run(fixture: Path) -> dict[str, object]:
+    """Execute the deterministic end-to-end conformance demonstration."""
     payload = json.loads(fixture.read_text(encoding="utf-8"))
     first = Observation.model_validate(payload)
     second_payload = dict(payload)

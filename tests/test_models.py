@@ -6,7 +6,6 @@ from pydantic import ValidationError
 
 from signal_ledger.models import Observation, Source
 
-
 FIXTURES = Path(__file__).parent / "fixtures"
 
 

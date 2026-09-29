@@ -1,22 +1,56 @@
-# GitHub Pages projection
+# Publication and GitHub Pages
 
-Signal Ledger publishes a generated static site through GitHub Pages.
+Signal Ledger distinguishes execution from publication.
 
-## Authority boundary
-
-The Pages site is a **read-only projection**. Repository-controlled code, schemas, profiles, documentation, and workflow evidence remain canonical. The rendered site must not create, mutate, or independently assert ledger state.
-
-## Build locally
-
-```bash
-python -m pip install -e ".[dev]"
-python -m signal_ledger.site --output-dir _site
+```text
+observations -> events -> claims/evidence -> assessment
+                    |
+                    v
+              assured run artifact
+                    |
+                    v
+             publication gate
+                    |
+                    v
+       signal-ledger.publication.v1
+                    |
+                    v
+        Pulse / Ledger / Methodology
 ```
 
-Open `_site/index.html` locally.
+## Publication contract
 
-## Deployment
+A Pages deployment consumes only a validated publication snapshot. The snapshot contains:
 
-`.github/workflows/pages.yml` runs tests, builds and validates the projection, uploads the Pages artifact, and deploys it to the `github-pages` environment. The build job has read-only repository permission. Only the deployment job receives `pages: write` and `id-token: write`.
+- `manifest.json` — schema, generation time, profile, counts and content digest;
+- `pulse.json` — material-change summary and run-derived counts;
+- `events.json`;
+- `claims.json`;
+- `assessments.json`;
+- `observations.json`.
 
-A failed test or projection validation prevents deployment.
+The digest covers the publication payload. The renderer fails closed if the payload no longer matches the manifest.
+
+Collection is not publication. Interpretation is not publication. The publication builder is the explicit boundary between working ledger state and public output.
+
+## Public views
+
+**Pulse** is the homepage and answers *what changed?*
+
+**Ledger** exposes the event, claim/evidence state and significance assessment behind the Pulse.
+
+**Methodology** explains the evidence and authority boundaries and exposes publication provenance.
+
+The machine-readable snapshot is also copied under `/data/` in the Pages artifact.
+
+## Current limitation
+
+The current Pages workflow uses the deterministic conformance run as its publication input. This closes the architectural publication gap, but it is not yet a live-source intelligence feed. The next pilot should replace that input with a governed real-source collection run without changing the publication contract.
+
+## Reproduce
+
+```bash
+python -m signal_ledger.demo --output artifacts/run.json
+python -m signal_ledger.publication --run artifacts/run.json --output-dir publications/latest
+python -m signal_ledger.site --publication-dir publications/latest --output-dir _site
+```

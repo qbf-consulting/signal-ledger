@@ -1,0 +1,24 @@
+Signal Ledger is a mixed-license repository.
+
+Unless an artifact states otherwise, the following licensing map applies:
+
+Apache License 2.0
+------------------
+Executable code, scripts, GitHub Actions workflows, machine-readable schemas,
+machine-readable profiles, API/event contracts, fixtures, test vectors, tests,
+validators, mappings, and generated evidence structures are licensed under the
+Apache License, Version 2.0. See LICENSE-CODE.
+
+Creative Commons Attribution 4.0 International
+-----------------------------------------------
+Specifications, documentation, governance prose, diagrams, explanatory
+material, and narrative examples are licensed under the Creative Commons
+Attribution 4.0 International license. See LICENSE-CONTENT.
+
+Exceptions and inherited material
+---------------------------------
+A more specific license or provenance notice attached to an artifact overrides
+this default map. Third-party and inherited material retains its applicable
+license and attribution requirements.
+
+Copyright 2026 QBF Consulting LLP.

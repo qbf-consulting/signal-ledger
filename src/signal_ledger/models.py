@@ -89,3 +89,36 @@ class Observation(BaseModel):
         if not SHA256_RE.match(value):
             raise ValueError("content_digest must use sha256:<64 lowercase hex characters>")
         return value
+
+
+class EventState(str, Enum):
+    NEW = "new"
+    CHANGED = "changed"
+    CONFIRMED = "confirmed"
+    SUPERSEDED = "superseded"
+
+
+class EntityRef(BaseModel):
+    model_config = ConfigDict(extra="forbid", frozen=True)
+
+    id: StableId
+    name: str = Field(min_length=1, max_length=200)
+    kind: str = Field(min_length=1, max_length=80)
+
+
+class Event(BaseModel):
+    model_config = ConfigDict(extra="forbid", frozen=True)
+
+    id: StableId
+    reconciliation_key: str = Field(min_length=1, max_length=500)
+    title: str = Field(min_length=1, max_length=500)
+    observation_ids: tuple[StableId, ...] = Field(min_length=1)
+    entities: tuple[EntityRef, ...] = ()
+    state: EventState = EventState.NEW
+
+    @field_validator("observation_ids")
+    @classmethod
+    def observations_must_be_unique(cls, values: tuple[str, ...]) -> tuple[str, ...]:
+        if len(values) != len(set(values)):
+            raise ValueError("observation_ids must be unique")
+        return values

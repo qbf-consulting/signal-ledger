@@ -1,0 +1,18 @@
+Signal Ledger
+Copyright 2026 QBF Consulting LLP
+
+This repository uses a mixed-license model.
+
+Executable and machine-readable artifacts are licensed under the Apache
+License, Version 2.0, as described in LICENSE and LICENSE-CODE.
+
+Specifications, documentation, governance prose, diagrams, explanatory
+material, and narrative examples are licensed under Creative Commons
+Attribution 4.0 International, as described in LICENSE and LICENSE-CONTENT.
+
+A more specific artifact-level license or third-party provenance notice takes
+precedence over the repository defaults.
+
+Signal Ledger is developed as open knowledge infrastructure by QBF Consulting
+LLP. The licenses do not grant rights to QBF Consulting LLP trademarks or
+imply endorsement.

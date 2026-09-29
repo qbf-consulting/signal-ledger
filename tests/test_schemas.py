@@ -3,7 +3,6 @@ from pathlib import Path
 
 from signal_ledger.schema import load_schema, validate
 
-
 ROOT = Path(__file__).parents[1]
 
 

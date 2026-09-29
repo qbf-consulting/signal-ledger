@@ -122,3 +122,23 @@ class Event(BaseModel):
         if len(values) != len(set(values)):
             raise ValueError("observation_ids must be unique")
         return values
+
+
+class EvidenceState(str, Enum):
+    INDETERMINATE = "indeterminate"
+    PARTIALLY_VERIFIED = "partially_verified"
+    VERIFIED = "verified"
+    CONTRADICTORY = "contradictory"
+    SUPERSEDED = "superseded"
+
+
+class Claim(BaseModel):
+    model_config = ConfigDict(extra="forbid", frozen=True)
+
+    id: StableId
+    statement: str = Field(min_length=1, max_length=5000)
+    event_id: StableId
+    supporting_observation_ids: tuple[StableId, ...] = ()
+    challenging_observation_ids: tuple[StableId, ...] = ()
+    primary_evidence_observation_ids: tuple[StableId, ...] = ()
+    state: EvidenceState = EvidenceState.INDETERMINATE

@@ -3,7 +3,6 @@ from pathlib import Path
 
 from signal_ledger.cli import main
 
-
 FIXTURES = Path(__file__).parent / "fixtures"
 
 

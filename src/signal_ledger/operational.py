@@ -3,6 +3,7 @@ from __future__ import annotations
 import hashlib
 import json
 import re
+import urllib.error
 import urllib.request
 import xml.etree.ElementTree as ET
 from dataclasses import dataclass
@@ -70,7 +71,7 @@ def collect(source: dict, timeout: int = 20) -> tuple[list[CollectedItem], dict]
         with urllib.request.urlopen(request, timeout=timeout) as response:
             items = parse_feed(response.read(), source, retrieved)
         return items, {"source_id": source["id"], "status": "ok", "items": len(items)}
-    except Exception as exc:
+    except (urllib.error.URLError, TimeoutError, OSError, ET.ParseError) as exc:
         return [], {"source_id": source["id"], "status": "failed", "error": f"{type(exc).__name__}: {exc}"}
 
 

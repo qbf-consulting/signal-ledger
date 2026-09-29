@@ -1,0 +1,62 @@
+name: Deploy Signal Ledger Pages
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "src/**"
+      - "profiles/**"
+      - "docs/**"
+      - "README.md"
+      - "LICENSE*"
+      - "NOTICE"
+      - "artifact-license-policy.json"
+      - ".github/workflows/pages.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - name: Install
+        run: python -m pip install -e ".[dev]"
+      - name: Test
+        run: pytest
+      - name: Build public projection
+        run: python -m signal_ledger.site --output-dir _site
+      - name: Validate projection
+        run: |
+          test -s _site/index.html
+          grep -q "read-only projection" _site/index.html
+          grep -q "github.com/qbf-consulting/signal-ledger" _site/index.html
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

@@ -1,14 +1,50 @@
 {
   "id": "ai-governance",
-  "dimensions": [
+  "title": "AI Governance",
+  "purpose": "Surface material changes in AI governance, regulation, standards and deployment accountability.",
+  "source_policy": {
+    "preferred_classes": [
+      "primary",
+      "official",
+      "research"
+    ],
+    "authority_expectations": [
+      "Regulatory status requires an official or primary source.",
+      "Secondary coverage may corroborate but cannot establish legal status."
+    ]
+  },
+  "relevance": {
+    "include_terms": [
+      "artificial intelligence",
+      "AI governance",
+      "AI regulation",
+      "foundation model",
+      "AI standard",
+      "algorithmic accountability"
+    ],
+    "exclude_terms": [
+      "consumer promotion",
+      "unverified rumor"
+    ]
+  },
+  "significance_dimensions": [
     "novelty",
     "ecosystem_impact",
     "governance_impact",
     "deployment_impact",
-    "research_significance",
     "reversibility",
     "evidence_strength",
     "geographic_scope"
   ],
-  "policy": "Assess dimensions independently; coverage volume is corroboration, not significance."
+  "discovery": {
+    "channels": [
+      "official-source",
+      "standards-body",
+      "research",
+      "independent-analysis"
+    ]
+  },
+  "output": {
+    "semantics": "Derived relevance and significance projection over canonical Signal Ledger evidence."
+  }
 }

@@ -89,7 +89,7 @@ Changes are expected to proceed through issue -> feature branch -> pull request,
 
 ## Licensing
 
-This repository intentionally has no license at present. Do not assume permission to redistribute repository content beyond rights explicitly granted by QBF Consulting LLP.
+Signal Ledger follows the QBF Consulting mixed-license convention. Executable and machine-readable artifacts are licensed under **Apache-2.0**; specifications, documentation, governance prose, diagrams, and narrative examples are licensed under **CC BY 4.0**. See [LICENSE](LICENSE), [LICENSE-CODE](LICENSE-CODE), [LICENSE-CONTENT](LICENSE-CONTENT), [NOTICE](NOTICE), and the machine-readable [artifact license policy](artifact-license-policy.json). Artifact-specific and inherited provenance notices take precedence.
 
 ## Contact
 

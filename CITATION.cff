@@ -1,0 +1,9 @@
+cff-version: 1.2.0
+message: "If you use Signal Ledger, cite the exact commit or release consulted. This prototype does not confer independent assurance."
+title: "Signal Ledger"
+type: software
+authors:
+  - family-names: Mukhopadhyay
+    given-names: Sankarshan
+repository-code: https://github.com/qbf-consulting/signal-ledger
+abstract: "Evidence-backed change intelligence architecture and implementation with explicit source provenance and derived assessment boundaries."
